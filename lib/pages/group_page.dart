@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:whatsfire/db.dart' as db;
+import 'package:whatsfire/models/groups.dart';
+import 'package:whatsfire/widgets/group_tile.dart';
 
 class GroupePage extends StatelessWidget {
   const GroupePage({
@@ -13,11 +15,8 @@ class GroupePage extends StatelessWidget {
         title: Text("WhatsFire"),
       ),
       body: StreamBuilder(
-        stream: Firestore.instance
-            .collection("groups")
-            .orderBy("name", descending: false)
-            .snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        stream: db.conection(),
+        builder: (context, AsyncSnapshot<List<Groups>> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text("Se produjo un error ${snapshot.error}"),
@@ -29,14 +28,18 @@ class GroupePage extends StatelessWidget {
             );
           }
           if (snapshot.hasData) {
-            List<DocumentSnapshot> docs = snapshot.data.documents;
-            return ListView.builder(
+            List<Groups> docs = snapshot.data;
+            return ListView.separated(
               itemCount: docs.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    docs[index].data["name"],
-                  ),
+                return GroupTile(docs[index]);
+              },
+              separatorBuilder: (context, index) {
+                return Divider(
+                  height: 1,
+                  color: Colors.black38,
+                  indent: 75,
+                  endIndent: 15,
                 );
               },
             );
