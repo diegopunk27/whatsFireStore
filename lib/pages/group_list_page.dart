@@ -4,8 +4,8 @@ import 'package:whatsfire/models/groups.dart';
 import 'package:whatsfire/widgets/error_center.dart';
 import 'package:whatsfire/widgets/groups_list.dart';
 
-class GroupePage extends StatelessWidget {
-  const GroupePage({
+class GroupListPage extends StatelessWidget {
+  const GroupListPage({
     Key key,
   }) : super(key: key);
 
