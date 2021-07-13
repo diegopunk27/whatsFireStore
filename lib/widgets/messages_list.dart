@@ -10,14 +10,17 @@ class MessagesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: mensajes.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(mensajes[index].text),
-          subtitle: Text(mensajes[index].datetime.toString()),
-        );
-      },
+    return Scrollbar(
+      child: ListView.builder(
+        reverse: true,
+        itemCount: mensajes.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(mensajes[index].text),
+            subtitle: Text(mensajes[index].datetime.toString()),
+          );
+        },
+      ),
     );
   }
 }

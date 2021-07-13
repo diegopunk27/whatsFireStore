@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsfire/db.dart';
+import 'package:whatsfire/db.dart' as db;
 import 'package:whatsfire/models/groups.dart';
 import 'package:whatsfire/models/message.dart';
 import 'package:whatsfire/widgets/circular_progress.dart';
@@ -47,7 +47,7 @@ class _ChatPageState extends State<ChatPage> {
         title: Text(grupo.name),
       ),
       body: StreamBuilder(
-        stream: getMessages(grupo.id),
+        stream: db.getMessages(grupo.id),
         builder: (context, AsyncSnapshot<List<Message>> snapshot) {
           if (snapshot.hasError) {
             return ErrorCenter(snapshot.error.toString());
@@ -60,7 +60,7 @@ class _ChatPageState extends State<ChatPage> {
               children: <Widget>[
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(top: 20),
+                    //padding: EdgeInsets.only(bottom: 180),
                     child: MessagesList(mensajes: snapshot.data),
                   ),
                 ),
@@ -68,7 +68,7 @@ class _ChatPageState extends State<ChatPage> {
                   controller: controller,
                   changeInput: changeInput,
                   onSend: (text) {
-                    print(text);
+                    db.sendMessage(grupo.id, Message(text));
                   },
                 ),
               ],

@@ -8,6 +8,15 @@ class Message {
       : text = doc.data["text"],
         id = doc.documentID,
         datetime = (doc.data["datetime"] as Timestamp).toDate();
+
+  Message(String text)
+      : text = text,
+        datetime = DateTime.now();
+
+  Map<String, dynamic> toMap() => {
+        "text": text,
+        "datetime": datetime,
+      };
 }
 
 List<Message> toMessagesList(QuerySnapshot query) {

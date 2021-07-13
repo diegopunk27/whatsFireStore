@@ -14,7 +14,14 @@ Stream<List<Groups>> getGroups() {
 Stream<List<Message>> getMessages(String idGroup) {
   return Firestore.instance
       .collection("groups/$idGroup/messages")
+      .orderBy("datetime", descending: true)
       .snapshots()
       .map(
           toMessagesList); // Forma 2 de llamar a la funcion que enlista en un map
+}
+
+Future<void> sendMessage(String idGroup, Message msg) async {
+  await Firestore.instance
+      .collection("groups/$idGroup/messages")
+      .add(msg.toMap());
 }

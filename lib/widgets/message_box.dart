@@ -26,6 +26,14 @@ class MessageBox extends StatelessWidget {
             flex: 5,
             child: Container(
               decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    //blurRadius: 5,
+                    offset: Offset(0, 1.5),
+                  ),
+                  BoxShadow(color: Colors.white),
+                ],
                 border: Border.all(
                   style: BorderStyle.solid,
                   color: Colors.teal,
@@ -40,7 +48,7 @@ class MessageBox extends StatelessWidget {
                 onSubmitted: _send,
                 cursorColor: Colors.teal,
                 decoration: InputDecoration(
-                  hintText: "Esscriba un mensaje...",
+                  hintText: "Escriba un mensaje...",
                   border: InputBorder.none,
                 ),
               ),
@@ -57,6 +65,14 @@ class MessageBox extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.teal,
                   shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      //blurRadius: 5,
+                      offset: Offset(0, 1.5),
+                    ),
+                    BoxShadow(color: Colors.white),
+                  ],
                 ),
                 child: Icon(
                   changeInput ? Icons.send : Icons.mic,
